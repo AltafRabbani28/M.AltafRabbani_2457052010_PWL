@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->UserModel = new UserModel();
         $this->kelasModel = new Kelas();
     }
 
