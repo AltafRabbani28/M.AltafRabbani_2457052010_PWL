@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
-class ProfileController extends Controller
+use Illuminate\Http\Request;
+use App\Models\Kelas;
+use App\Models\User;
+
+class UserController extends Controller
 {
-    public function profile()
+    public function create()
     {
+        $kelasModel = new Kelas();
+        $kelas = $kelasModel->getKelas();
+
         $data = [
-            'nama' => 'M. Altaf Rabbani',
-            'npm' => '2457052010',
-            'kelas' => 'Sistem Informasi'
+            'title' => 'Create User',
+            'kelas' => $kelas,
         ];
 
-        return view('profile', $data);
+        return view('create_user', $data);
     }
 }

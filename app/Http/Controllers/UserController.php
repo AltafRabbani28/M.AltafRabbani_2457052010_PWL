@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\UserModel;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-   public UserModel $userModel;
-   public Kelas $kelasModel;
+    public $userModel;
+    public $kelasModel;
 
     public function __construct()
     {
@@ -17,24 +17,13 @@ class UserController extends Controller
         $this->kelasModel = new Kelas();
     }
 
-    public function index()
-    {
-        $users = $this->userModel->getUser();
-
-        return view('list_user', [
-            'users' => $users
-        ]);
-    }
-
     public function create()
     {
         $kelas = $this->kelasModel->getKelas();
-
         $data = [
             'title' => 'Create User',
             'kelas' => $kelas,
         ];
-
         return view('create_user', $data);
     }
 
@@ -47,5 +36,14 @@ class UserController extends Controller
         ]);
 
         return redirect()->to('/user');
+    }
+
+    public function index()
+    {
+        $data = [
+            'title' => 'List User',
+            'users' => $this->userModel->getUser(),
+        ];
+        return view('list_user', $data);
     }
 }

@@ -2,39 +2,46 @@
 
 @section('content')
 
-<div>
-    <h1>Buat Pengguna Baru</h1>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Buat Pengguna Baru</h4>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('user.store') }}" method="POST">
+                    @csrf
 
-    <form action="{{ route('user.store') }}" method="POST">
-        @csrf
+                    <div class="mb-3">
+                        <label for="nama" class="form-label">Nama:</label>
+                        <input type="text" class="form-control" id="nama" name="nama" required>
+                    </div>
 
-        <label for="nama">Nama:</label><br>
-        <input type="text" id="nama" name="nama">
-        <br><br>
+                    <div class="mb-3">
+                        <label for="npm" class="form-label">NPM:</label>
+                        <input type="text" class="form-control" id="npm" name="npm" required>
+                    </div>
 
-        <label for="npm">NPM:</label><br>
-        <input type="text" id="npm" name="npm">
-        <br><br>
+                    <div class="mb-3">
+                        <label for="kelas_id" class="form-label">Kelas:</label>
+                        <select class="form-select" name="kelas_id" id="kelas_id" required>
+                            <option value="">-- Pilih Kelas --</option>
+                            @foreach ($kelas as $kelasItem)
+                                <option value="{{ $kelasItem->id }}">
+                                    {{ $kelasItem->nama_kelas }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-        <label for="kelas">Kelas:</label><br>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
 
-        <select name="kelas_id" id="kelas_id">
-
-            @foreach ($kelas as $kelasItem)
-
-                <option value="{{ $kelasItem->id }}">
-                    {{ $kelasItem->nama_kelas }}
-                </option>
-
-            @endforeach
-
-        </select>
-
-        <br><br>
-
-        <button type="submit">Submit</button>
-
-    </form>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection
